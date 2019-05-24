@@ -13,9 +13,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private boolean avvio = false;
 	private int punteggio = 0;
 	private int mattoncini;
+        private int vite=0;
 	
 	private Timer timer;
-	private int delay=8;
+	private int delay=5;
 	
 	private int giocatoreX = 310;
 	
@@ -51,7 +52,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 timer=new Timer(delay,this);
 		timer.start();
                 
-                repaint();
 	}
 	
         @Override
@@ -72,12 +72,14 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		
 		// punteggio	
 		g.setColor(Color.WHITE);
+                g.setFont(new Font("Arial",Font.BOLD, 16));
+		g.drawString("Punteggio: ", 510,40);
+                g.drawString("Vite: "+vite, 300,40);
 		g.setFont(new Font("Arial Black",Font.BOLD, 25));
-		g.drawString(""+punteggio, 590,40);
+		g.drawString(""+punteggio, 600,40);
                 
-                g.setColor(Color.WHITE);
-		g.setFont(new Font("Arial Black",Font.BOLD, 18));
-		g.drawString("MATTOncini", 90,40);
+		g.setFont(new Font("Arial",Font.BOLD, 14));
+		g.drawString("MATTONCINI 1.1.2", 80,40);
   
 		
 		// barra comandata
@@ -89,18 +91,19 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillOval(pallapX, pallapY, 20, 20);
 	
 		// when you won the game
-		if(mattoncini <= 0)
+		if(mattoncini <= 15)
 		{
 			 avvio = false;
              direzionepX = 0;
      		 direzionepY = 0;
              g.setColor(Color.pink);
              g.setFont(new Font("Arial Black",Font.BOLD, 30));
-             g.drawString("You Won", 260,300);
+             g.drawString("Hai vinto!", 260,300);
              
              g.setColor(Color.pink);
              g.setFont(new Font("Arial Black",Font.BOLD, 20));           
-             g.drawString("Clicca invio per restartare il gioco", 230,350);  
+             g.drawString("Clicca invio per giocare ancora", 230,350);  
+             
 		}
 		
 		// when you lose the game
@@ -116,7 +119,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
              
              g.setColor(Color.pink);
              g.setFont(new Font("Arial Black",Font.BOLD, 20));
-             g.drawString("Clicca invio per restartare il gioco", 210,350);  
+             g.drawString("Clicca invio per giocare ancora", 210,350);  
              
         }
 		
@@ -159,23 +162,23 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                                     direzionepY = ThreadLocalRandom.current().nextInt(-2, 1);
                                 }while (direzionepY==0);
 				giocatoreX = 310;
-				punteggio = 0;
+                                vite++;
+				//punteggio = 0;
 			
                                 /*mappa = new MapGen(2);
-                                mattoncini = 48;
+                                mattoncini = 48;*/
                                         	
-				repaint();*/
+				repaint();
 			}
+
         }		
 	}
 
         @Override
 	public void keyReleased(KeyEvent e) {
-        repaint();
         }
         @Override
 	public void keyTyped(KeyEvent e) {
-        repaint();
         }
 	
 	public void moveRight()
