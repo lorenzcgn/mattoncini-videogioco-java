@@ -12,7 +12,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     
 	private boolean avvio = false;
 	private int punteggio = 0;
-	private int bricksTotali = 48;
+	private int mattoncini;
 	
 	private Timer timer;
 	private int delay=8;
@@ -29,8 +29,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	public Gameplay()
 	{	
             Menu1 menu=new Menu1();
-                        JFrame obj2 = new JFrame();
-                        obj2.setBounds(705, 100, 320, 509);
+            JFrame obj2 = new JFrame();
+            obj2.setBounds(705, 100, 320, 509);
             obj2.setResizable(false);
             obj2.setVisible(true);
             obj2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,8 +43,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             temp=menu.getDifficolta();
             
 
-		mappa=new MapGen(temp);            
-		addKeyListener(this);
+            mappa=new MapGen(temp);
+                mattoncini=mappa.getMattoncini();
+                addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
                 timer=new Timer(delay,this);
@@ -88,7 +89,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillOval(pallapX, pallapY, 20, 20);
 	
 		// when you won the game
-		if(bricksTotali <= 0)
+		if(mattoncini <= 0)
 		{
 			 avvio = false;
              direzionepX = 0;
@@ -114,8 +115,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
              g.drawString("Hai fatto: "+punteggio+" punti", 150,400);
              
              g.setColor(Color.pink);
-             g.setFont(new Font("Arial Black",Font.BOLD, 20));           
-             g.drawString("Clicca invio per restartare il gioco", 210,350);        
+             g.setFont(new Font("Arial Black",Font.BOLD, 20));
+             g.drawString("Clicca invio per restartare il gioco", 210,350);  
+             
         }
 		
 		g.dispose();
@@ -159,17 +161,19 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 				giocatoreX = 310;
 				punteggio = 0;
 			
-                                mappa = new MapGen(2);
-                                bricksTotali = 48;
+                                /*mappa = new MapGen(2);
+                                mattoncini = 48;
                                         	
-				repaint();
+				repaint();*/
 			}
         }		
 	}
 
+        @Override
 	public void keyReleased(KeyEvent e) {
         repaint();
         }
+        @Override
 	public void keyTyped(KeyEvent e) {
         repaint();
         }
@@ -186,6 +190,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		giocatoreX-=30;	 	
 	}
 	
+        @Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		timer.start();
@@ -227,7 +232,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 						{					
 							mappa.setBrickValue(0, i, j);
 							punteggio+=5;	
-							bricksTotali--;
+							mattoncini--;
 							
 							// when ball hit right or left of brick
 							if(pallapX + 19 <= brickRect.x || pallapX + 1 >= brickRect.x + brickRect.width)	

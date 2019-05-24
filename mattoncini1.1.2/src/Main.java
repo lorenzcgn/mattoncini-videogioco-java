@@ -9,7 +9,7 @@ public class Main {
             Gameplay gioco = new Gameplay();
             
             obj.setBounds(10, 10, 700, 600);
-            obj.setTitle("Mattoncini - Huqi & Cagni");		
+            obj.setTitle("Mattoncini 1.1.2 - Huqi & Cagni");		
             obj.setResizable(false);
             obj.setVisible(true);
             obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

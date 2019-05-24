@@ -8,6 +8,17 @@ public class MapGen
 	public int mappa[][];
 	public int brickWidth;
 	public int brickHeight;
+        public int mattoncini;
+
+    public int getMattoncini() {
+        return mattoncini;
+    }
+
+    public void setMattoncini(int mattoncini) {
+        this.mattoncini = mattoncini;
+    }
+        
+        
 	
 	public MapGen (int scelta)
 	{
@@ -16,16 +27,19 @@ public class MapGen
             switch (scelta){
                                     case 0: 
                                         mappa = new int[4][7];
+                                        setMattoncini(28);
                                          row=4;
                                          col=7;
                                         break;
                                     case 1: 
                                         mappa = new int[5][12];
+                                        setMattoncini(60);
                                          row=4;
                                          col=12;
                                         break;
                                     case 2:
                                         mappa = new int[7][12];
+                                        setMattoncini(72);
                                          row=5;
                                          col=12;
                                         break;
