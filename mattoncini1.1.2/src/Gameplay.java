@@ -44,7 +44,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             obj2.setVisible(true);
             int temp=-1;
             do{
-            System.out.println("Fai la tua scelta di difficolta col menu");
+            System.out.println("\n"+"Fai la tua scelta di difficolta col menu");
             }while(menu.getContatore()==0);
             temp=menu.getDifficolta();
             
@@ -116,10 +116,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 //super.paintComponent(g);
                 g.drawImage(image, pallapX, pallapY, 0x14, 0x14, this);
 
-            
-	
+                if(mattoncini == mattoncini){
+                g.setFont(new Font("Arial Black",Font.BOLD, 20));
+             g.drawString("Clicca invio per iniziare a giocare", 160,350);  
+        }
 		// when you won the game
-		if(mattoncini <= 25)
+		if(mattoncini <= 0)
 		{
 			 avvio = false;
              direzionepX = 0;
