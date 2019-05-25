@@ -2,6 +2,11 @@
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class MapGen
 {
@@ -65,13 +70,18 @@ public class MapGen
 			{
 				if(mappa[i][j] > 0)
 				{
-					g.setColor(Color.white);
-					g.fillRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight);
+					//g.setColor(Color.white);
+                                        BufferedImage image = this.mattoncino();
+                                        g.drawImage(image, j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight, null);
+                                        g.setStroke(new BasicStroke(3));
+					//g.fillRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight);
 					
 					// this is just to show separate brick, game can still run without it
-					g.setStroke(new BasicStroke(3));
+					
 					g.setColor(Color.black);
-					g.drawRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight);				
+					g.drawRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight);		
+                                        
+                                        
 				}
 			}
 		}
@@ -81,4 +91,18 @@ public class MapGen
 	{
 		mappa[row][col] = value;
 	}
+        
+                public BufferedImage mattoncino()
+  {
+      BufferedImage image = null;
+    try
+    {
+        image = ImageIO.read(new File("mattoncini.jpg"));
+    } 
+    catch (IOException e)
+    {
+    }
+    return image;
+  }
+                
 }

@@ -8,7 +8,7 @@ public class Main {
             JFrame obj=new JFrame();
             Gameplay gioco = new Gameplay();
             
-            obj.setBounds(10, 10, 700, 600);
+            obj.setBounds(200, 200, 700, 600);
             obj.setTitle("Mattoncini 1.1.2 - Huqi & Cagni");		
             obj.setResizable(false);
             obj.setVisible(true);
