@@ -2,7 +2,12 @@
 
 import java.awt.event.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 import javax.swing.*;
 //import javax.swing.Timer;
@@ -31,7 +36,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	{	
             Menu1 menu=new Menu1();
             JFrame obj2 = new JFrame();
-            obj2.setBounds(705, 100, 320, 509);
+            obj2.setBounds(895, 290, 320, 509);
             obj2.setResizable(false);
             obj2.setVisible(true);
             obj2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,6 +59,23 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 
 	}
 	
+        
+        public BufferedImage palla()
+  {
+      BufferedImage image = null;
+    try
+    {
+        image = ImageIO.read(new File("palla.png"));
+    } 
+    catch (IOException e)
+    {
+    }
+    return image;
+  }
+
+
+        
+        
         @Override
 	public void paint(Graphics g)
 	{
@@ -73,10 +95,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		// punteggio	
 		g.setColor(Color.WHITE);
                 g.setFont(new Font("Arial",Font.BOLD, 16));
-		g.drawString("Punteggio: ", 510,40);
-                g.drawString("Vite: "+vite, 300,40);
+		g.drawString("Punteggio: ", 512,40);
+                g.drawString("Vite: ", 320,40);
 		g.setFont(new Font("Arial Black",Font.BOLD, 25));
 		g.drawString(""+punteggio, 600,40);
+                g.drawString(""+vite, 358,40);
                 
 		g.setFont(new Font("Arial",Font.BOLD, 14));
 		g.drawString("MATTONCINI 1.1.2", 80,40);
@@ -88,21 +111,26 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		
 		// palla
 		g.setColor(Color.pink);
-		g.fillOval(pallapX, pallapY, 20, 20);
+		//g.fillOval(pallapX, pallapY, 20, 20);
+                BufferedImage image = this.palla();
+                //super.paintComponent(g);
+                g.drawImage(image, pallapX, pallapY, 0x14, 0x14, this);
+
+            
 	
 		// when you won the game
-		if(mattoncini <= 15)
+		if(mattoncini <= 25)
 		{
 			 avvio = false;
              direzionepX = 0;
      		 direzionepY = 0;
              g.setColor(Color.pink);
              g.setFont(new Font("Arial Black",Font.BOLD, 30));
-             g.drawString("Hai vinto!", 260,300);
+             g.drawString("Hai vinto!", 270,300);
              
              g.setColor(Color.pink);
              g.setFont(new Font("Arial Black",Font.BOLD, 20));           
-             g.drawString("Clicca invio per giocare ancora", 230,350);  
+             g.drawString("Grazie per aver giocato", 220,350);  
              
 		}
 		
@@ -114,16 +142,16 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
      		 direzionepY = 0;
              g.setColor(Color.pink);
              g.setFont(new Font("Arial Black",Font.BOLD, 30));
-             g.drawString("Game Over",200,300);
-             g.drawString("Hai fatto: "+punteggio+" punti", 150,400);
+             g.drawString("Game Over",260,300);
+             g.drawString("Hai fatto: "+punteggio+" punti", 200,400);
              
              g.setColor(Color.pink);
              g.setFont(new Font("Arial Black",Font.BOLD, 20));
-             g.drawString("Clicca invio per giocare ancora", 210,350);  
-             
+             g.drawString("Clicca invio per giocare ancora", 170,350);  
+             g.dispose();
         }
 		
-		g.dispose();
+		
 	}	
 
         @Override
@@ -168,7 +196,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                                 /*mappa = new MapGen(2);
                                 mattoncini = 48;*/
                                         	
-				repaint();
+				//repaint();
 			}
 
         }		
