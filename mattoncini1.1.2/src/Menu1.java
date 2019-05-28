@@ -57,13 +57,14 @@ public class Menu1 extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, java.awt.Color.pink));
         setForeground(java.awt.Color.pink);
 
         jLabel1.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 255, 0));
+        jLabel1.setForeground(java.awt.Color.green);
         jLabel1.setText("Benvenuto in");
 
         jLabel2.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 11)); // NOI18N
@@ -71,8 +72,9 @@ public class Menu1 extends javax.swing.JPanel {
         jLabel2.setText("Scegli la difficoltà!");
 
         jButton1.setBackground(java.awt.Color.pink);
+        jButton1.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jButton1.setForeground(java.awt.Color.white);
-        jButton1.setText("Banale");
+        jButton1.setText("BANALE");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -84,18 +86,20 @@ public class Menu1 extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setBackground(java.awt.Color.orange);
+        jButton2.setBackground(java.awt.Color.green);
+        jButton2.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jButton2.setForeground(java.awt.Color.white);
-        jButton2.setText("Onesto");
+        jButton2.setText("ONESTO");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 153, 102));
+        jButton3.setBackground(java.awt.Color.pink);
+        jButton3.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Un po' meno facile");
+        jButton3.setText("DIFFICILE");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -118,6 +122,10 @@ public class Menu1 extends javax.swing.JPanel {
         jLabel6.setForeground(java.awt.Color.pink);
         jLabel6.setText("Mattoncini 1.1.2!");
 
+        jLabel7.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("> Devi usare le frecce da tastiera");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,7 +145,8 @@ public class Menu1 extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +177,9 @@ public class Menu1 extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -200,6 +211,7 @@ public class Menu1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
