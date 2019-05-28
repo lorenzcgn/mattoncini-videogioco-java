@@ -116,10 +116,19 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 //super.paintComponent(g);
                 g.drawImage(image, pallapX, pallapY, 0x14, 0x14, this);
 
-                if(mattoncini == mattoncini){
+               /* if(mattoncini == mattoncini){
                 g.setFont(new Font("Arial Black",Font.BOLD, 20));
-             g.drawString("Clicca invio per iniziare a giocare", 160,350);  
-        }
+             int t=0;
+                do{
+                 g.drawString("Clicca invio per iniziare a giocare", 160,350);
+                 t++;
+             }while(t<5);
+                g.setColor(Color.BLACK);
+                g.fillRect(140, 310, 460, 50);
+        } */
+                
+                
+                
 		// when you won the game
 		if(mattoncini <= 0)
 		{
