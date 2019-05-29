@@ -21,18 +21,18 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         private int vite=0;
 	
 	private Timer timer;
-	private int delay=5;
+	private int delay=-1;
 	
 	private int giocatoreX = 310;
 	
 	private int pallapX = 120;
 	private int pallapY = 350;
-	private int direzionepX = -1;
-	private int direzionepY = -2;
+	private int direzionepX = 100;
+	private int direzionepY = 200;
 	
 	private MapGen mappa;
 	
-	public Gameplay()
+	public Gameplay() throws InterruptedException
 	{	
             Menu1 menu=new Menu1();
             JFrame obj2 = new JFrame();
@@ -45,9 +45,23 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             int temp=-1;
             do{
             System.out.println("\n"+"Fai la tua scelta di difficolta col menu");
+            Thread.sleep(1500);
             }while(menu.getContatore()==0);
             temp=menu.getDifficolta();
             
+            switch (menu.getDifficolta()){
+                                    case 0: 
+                                        break;
+                                    case 1: 
+                                        delay=-105;
+                                        direzionepX = -170;
+                                        direzionepY = -140;
+                                        break;
+                                    case 2:
+                                        direzionepX = -60;
+                                        direzionepY = -80;
+                                        break;
+                                }		
 
             mappa=new MapGen(temp);
                 mattoncini=mappa.getMattoncini();
@@ -55,6 +69,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
                 timer=new Timer(delay,this);
+            int pause = 0;
+                timer.setInitialDelay(pause);
 		timer.start();
                 
 	}
@@ -143,7 +159,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
              g.setFont(new Font("Arial Black",Font.BOLD, 20));           
              g.drawString("Grazie per aver giocato", 220,350);  
              
+             BufferedImage image2 = coppa();
+             g.drawImage(image2, 310, 400, 100, 100, null);
 		}
+                
+                
 		
 		// when you lose the game
 		if(pallapY > 570)
@@ -163,7 +183,20 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         }
 		
 		
-	}	
+	}
+        
+        public BufferedImage coppa()
+  {
+      BufferedImage image = null;
+    try
+    {
+        image = ImageIO.read(new File("coppa.png"));
+    } 
+    catch (IOException e)
+    {
+    }
+    return image;
+  }
 
         @Override
 	public void keyPressed(KeyEvent e){
@@ -207,7 +240,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                                 /*mappa = new MapGen(2);
                                 mattoncini = 48;*/
                                         	
-				//repaint();
+				repaint();
 			}
 
         }		
@@ -241,12 +274,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 			if(new Rectangle(pallapX, pallapY, 20, 20).intersects(new Rectangle(giocatoreX, 550, 30, 8)))
 			{
 				direzionepY = -direzionepY;
-				direzionepX = -2;
+				direzionepX = -5;
 			}
 			else if(new Rectangle(pallapX, pallapY, 20, 20).intersects(new Rectangle(giocatoreX + 70, 550, 30, 8)))
 			{
 				direzionepY = -direzionepY;
-				direzionepX = direzionepX + 1;
+				direzionepX = direzionepX + 3;
 			}
 			else if(new Rectangle(pallapX, pallapY, 20, 20).intersects(new Rectangle(giocatoreX + 30, 550, 40, 8)))
 			{

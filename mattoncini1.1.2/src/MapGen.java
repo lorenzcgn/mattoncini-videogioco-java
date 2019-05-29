@@ -14,6 +14,7 @@ public class MapGen
 	public int brickWidth;
 	public int brickHeight;
         public int mattoncini;
+        public int scelta;
 
     public int getMattoncini() {
         return mattoncini;
@@ -27,6 +28,7 @@ public class MapGen
 	
 	public MapGen (int scelta)
 	{
+            this.scelta=scelta;
             int row=0;
             int col=0;
             switch (scelta){
@@ -39,13 +41,13 @@ public class MapGen
                                     case 1: 
                                         mappa = new int[5][12];
                                         setMattoncini(60);
-                                         row=4;
+                                         row=5;
                                          col=12;
                                         break;
                                     case 2:
-                                        mappa = new int[7][12];
+                                        mappa = new int[6][12];
                                         setMattoncini(72);
-                                         row=5;
+                                         row=6;
                                          col=12;
                                         break;
                                 }			
@@ -73,7 +75,7 @@ public class MapGen
 					//g.setColor(Color.white);
                                         BufferedImage image = this.mattoncino();
                                         g.drawImage(image, j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight, null);
-                                        g.setStroke(new BasicStroke(3));
+                                        g.setStroke(new BasicStroke(4));
 					//g.fillRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight);
 					
 					// this is just to show separate brick, game can still run without it
@@ -98,6 +100,12 @@ public class MapGen
     try
     {
         image = ImageIO.read(new File("mattoncini.jpg"));
+        if(scelta==1){
+            image = ImageIO.read(new File("mattoncini1.jpg"));
+        }
+        if(scelta==2){
+            image = ImageIO.read(new File("mattoncini2.png"));
+        }
     } 
     catch (IOException e)
     {
