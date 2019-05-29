@@ -78,7 +78,6 @@ public class MapGen
                                         g.setStroke(new BasicStroke(4));
 					//g.fillRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight);
 					
-					// this is just to show separate brick, game can still run without it
 					
 					g.setColor(Color.black);
 					g.drawRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight);		

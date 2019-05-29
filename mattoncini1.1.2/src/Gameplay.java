@@ -99,10 +99,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.black);
 		g.fillRect(1, 1, 692, 592);
 		
-		// disegnamo la mappa
+		// mappa
 		mappa.draw((Graphics2D) g);
 		
-		// bordi della finestra
+		// bordi
 		g.setColor(Color.pink);
 		g.fillRect(0, 0, 3, 592);
 		g.fillRect(0, 0, 692, 3);
@@ -121,7 +121,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.drawString("MATTONCINI 1.1.2", 80,40);
   
 		
-		// barra comandata
+		// barra
 		g.setColor(Color.pink);
 		g.fillRect(giocatoreX, 550, 100, 8);
 		
@@ -145,7 +145,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 
                 
                 
-		// when you won the game
+		// vinci
 		if(mattoncini <= 0)
 		{
 			 avvio = false;
@@ -165,7 +165,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 
                 
 		
-		// when you lose the game
+		// perdi
 		if(pallapY > 570)
         {
 			 avvio = false;
@@ -286,14 +286,13 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 				direzionepY = -direzionepY;
 			}
 			
-			// check map collision with the ball		
+			// collisioni		
 			A: for(int i = 0; i<mappa.mappa.length; i++)
 			{
 				for(int j =0; j<mappa.mappa[0].length; j++)
 				{				
 					if(mappa.mappa[i][j] > 0)
 					{
-						//scores++;
 						int brickX = j * mappa.brickWidth + 80;
 						int brickY = i * mappa.brickHeight + 50;
 						int brickWidth = mappa.brickWidth;
@@ -309,12 +308,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 							punteggio+=5;	
 							mattoncini--;
 							
-							// when ball hit right or left of brick
 							if(pallapX + 19 <= brickRect.x || pallapX + 1 >= brickRect.x + brickRect.width)	
 							{
 								direzionepX = -direzionepX;
 							}
-							// when ball hits top or bottom of brick
 							else
 							{
 								direzionepY = -direzionepY;				
