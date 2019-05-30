@@ -1,5 +1,4 @@
 
-
 import java.awt.event.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,13 +26,15 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	
 	private int pallapX = 120;
 	private int pallapY = 350;
-	private int direzionepX = 100;
-	private int direzionepY = 200;
+	private int direzionepX = 80;
+	private int direzionepY = 90;
 	
 	private MapGen mappa;
 	
 	public Gameplay() throws InterruptedException
 	{	
+            // creazione "finestra di gioco", genera mappa tramite MapGen e la scelta difficoltà 
+            // del menù e aspettando risposta mettendo in sleep il thread
             Menu1 menu=new Menu1();
             JFrame obj2 = new JFrame();
             obj2.setBounds(895, 290, 320, 509);
@@ -112,7 +113,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.WHITE);
                 g.setFont(new Font("Arial",Font.BOLD, 16));
 		g.drawString("Punteggio: ", 512,40);
-                g.drawString("Vite: ", 320,40);
+                g.drawString("Tentativi: ", 280,40);
 		g.setFont(new Font("Arial Black",Font.BOLD, 25));
 		g.drawString(""+punteggio, 600,40);
                 g.drawString(""+vite, 358,40);
@@ -145,7 +146,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 
                 
                 
-		// vinci
+		// casistica se vinci
 		if(mattoncini <= 0)
 		{
 			 avvio = false;
@@ -165,7 +166,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 
                 
 		
-		// perdi
+		// casistica se "perdi"
 		if(pallapY > 570)
         {
 			 avvio = false;
@@ -178,7 +179,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
              
              g.setColor(Color.pink);
              g.setFont(new Font("Arial Black",Font.BOLD, 20));
-             g.drawString("Clicca invio per giocare ancora", 170,350);  
+             g.drawString("Clicca invio per continuare a giocare", 170,350);  
              g.dispose();
         }
 		
@@ -197,7 +198,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     }
     return image;
   }
-
+                //prendere l'evento del tasto premuto
         @Override
 	public void keyPressed(KeyEvent e){
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT){        
@@ -208,22 +209,16 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                     }
         }
 		
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{          
-			if(giocatoreX < 10)
-			{
-				giocatoreX = 10;
-			}
-			else
-			{
+		if (e.getKeyCode() == KeyEvent.VK_LEFT){          
+			if(giocatoreX < 10){
+                            giocatoreX = 10;
+			}else{
 				moveLeft();
 			}
         }		
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		{          
+		if (e.getKeyCode() == KeyEvent.VK_ENTER){          
                     
-			if(!avvio)
-			{
+			if(!avvio){
 				avvio = true;
 				pallapX = ThreadLocalRandom.current().nextInt(250, 550);
 				pallapY = 350;
@@ -245,14 +240,16 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
         }		
 	}
-
+            //rilascio del tasto
         @Override
 	public void keyReleased(KeyEvent e) {
         }
         @Override
 	public void keyTyped(KeyEvent e) {
         }
-	
+        
+	//movimento richiamato nella pressione del tasto
+        
 	public void moveRight()
 	{
 		avvio = true;
@@ -265,81 +262,67 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		giocatoreX-=30;	 	
 	}
 	
+        //eventi della palla quando gioco startato
         @Override
-	public void actionPerformed(ActionEvent e) 
-	{
+	public void actionPerformed(ActionEvent e) {
 		timer.start();
-		if(avvio)
-		{			
-			if(new Rectangle(pallapX, pallapY, 20, 20).intersects(new Rectangle(giocatoreX, 550, 30, 8)))
-			{
+                //definisce il movimento della palla
+		if(avvio){			
+			if(new Rectangle(pallapX, pallapY, 20, 20).intersects(new Rectangle(giocatoreX, 550, 30, 8))){
 				direzionepY = -direzionepY;
 				direzionepX = -5;
-			}
-			else if(new Rectangle(pallapX, pallapY, 20, 20).intersects(new Rectangle(giocatoreX + 70, 550, 30, 8)))
-			{
+			}else if(new Rectangle(pallapX, pallapY, 20, 20).intersects(new Rectangle(giocatoreX + 70, 550, 30, 8))){
 				direzionepY = -direzionepY;
 				direzionepX = direzionepX + 3;
-			}
-			else if(new Rectangle(pallapX, pallapY, 20, 20).intersects(new Rectangle(giocatoreX + 30, 550, 40, 8)))
-			{
+			}else if(new Rectangle(pallapX, pallapY, 20, 20).intersects(new Rectangle(giocatoreX + 30, 550, 40, 8))){
 				direzionepY = -direzionepY;
 			}
 			
-			// collisioni		
-			A: for(int i = 0; i<mappa.mappa.length; i++)
-			{
-				for(int j =0; j<mappa.mappa[0].length; j++)
-				{				
-					if(mappa.mappa[i][j] > 0)
-					{
-						int brickX = j * mappa.brickWidth + 80;
-						int brickY = i * mappa.brickHeight + 50;
-						int brickWidth = mappa.brickWidth;
-						int brickHeight = mappa.brickHeight;
+		// collisioni della palla e relativa direzione al contatto		
+                A: for(int i = 0; i<mappa.mappa.length; i++){
+                    for(int j =0; j<mappa.mappa[0].length; j++){				
+			if(mappa.mappa[i][j] > 0){
+                            int brickX = j * mappa.brickWidth + 80;
+                            int brickY = i * mappa.brickHeight + 50;
+                            int brickWidth = mappa.brickWidth;
+                            int brickHeight = mappa.brickHeight;
 						
-						Rectangle rect = new Rectangle(brickX, brickY, brickWidth, brickHeight);					
-						Rectangle ballRect = new Rectangle(pallapX, pallapY, 20, 20);
-						Rectangle brickRect = rect;
+                            Rectangle rect = new Rectangle(brickX, brickY, brickWidth, brickHeight);					
+                            Rectangle ballRect = new Rectangle(pallapX, pallapY, 20, 20);
+                            Rectangle brickRect = rect;
 						
-						if(ballRect.intersects(brickRect))
-						{					
-							mappa.setBrickValue(0, i, j);
-							punteggio+=5;	
-							mattoncini--;
+                        if(ballRect.intersects(brickRect)){					
+                            mappa.setBrickValue(0, i, j);
+                            punteggio+=5;	
+                            mattoncini--;
 							
-							if(pallapX + 19 <= brickRect.x || pallapX + 1 >= brickRect.x + brickRect.width)	
-							{
-								direzionepX = -direzionepX;
-							}
-							else
-							{
-								direzionepY = -direzionepY;				
-							}
-							
-							break A;
-						}
-					}
-				}
+                            if(pallapX + 19 <= brickRect.x || pallapX + 1 >= brickRect.x + brickRect.width){
+                                direzionepX = -direzionepX;
+                            }else{
+                                direzionepY = -direzionepY;				
+                            }
+			break A;
 			}
-			
-			pallapX += direzionepX;
-			pallapY += direzionepY;
-			
-			if(pallapX < 0)
-			{
-				direzionepX = -direzionepX;
 			}
-			if(pallapY < 0)
-			{
-				direzionepY = -direzionepY;
-			}
-			if(pallapX > 670)
-			{
-				direzionepX = -direzionepX;
-			}		
+                    }
+                }
 			
-			repaint();		
+            pallapX += direzionepX;
+            pallapY += direzionepY;
+			
+            if(pallapX < 0){
+                direzionepX = -direzionepX;
+            }
+
+            if(pallapY < 0){
+                direzionepY = -direzionepY;
+            }
+			
+            if(pallapX > 670){
+		direzionepX = -direzionepX;
+            }		
+	
+            repaint();		
 		}
 	}
 }

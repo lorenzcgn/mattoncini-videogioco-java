@@ -26,8 +26,8 @@ public class MapGen
         
         
 	
-	public MapGen (int scelta)
-	{
+	public MapGen (int scelta){
+            //determina righe e colonne della matrice di mattoncini in base alla scelta
             this.scelta=scelta;
             int row=0;
             int col=0;
@@ -63,26 +63,20 @@ public class MapGen
 		brickHeight = 150/row;
 	}
         
-	
-	public void draw(Graphics2D g)
-	{
-		for(int i = 0; i<mappa.length; i++)
-		{
-			for(int j =0; j<mappa[0].length; j++)
-			{
-				if(mappa[i][j] > 0)
-				{
+	//si va a disegnare nel vero e proprio il cubetto per ogni singolo mattoncino, riga per riga, colonna per colonna
+	public void draw(Graphics2D g) throws IOException{
+		for(int i = 0; i<mappa.length; i++){
+			for(int j =0; j<mappa[0].length; j++){
+				if(mappa[i][j] > 0){
 					//g.setColor(Color.white);
                                         BufferedImage image = this.mattoncino();
                                         g.drawImage(image, j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight, null);
                                         g.setStroke(new BasicStroke(4));
 					//g.fillRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight);
 					
-					
 					g.setColor(Color.black);
 					g.drawRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight);		
-                                        
-                                        
+                                         
 				}
 			}
 		}
@@ -93,22 +87,16 @@ public class MapGen
 		mappa[row][col] = value;
 	}
         
-                public BufferedImage mattoncino()
+                public BufferedImage mattoncino() throws IOException
   {
       BufferedImage image = null;
-    try
-    {
-        image = ImageIO.read(new File("mattoncini.jpg"));
+      image = ImageIO.read(new File("mattoncini.jpg"));
         if(scelta==1){
             image = ImageIO.read(new File("mattoncini1.jpg"));
         }
         if(scelta==2){
             image = ImageIO.read(new File("mattoncini2.png"));
         }
-    } 
-    catch (IOException e)
-    {
-    }
     return image;
   }
                 
