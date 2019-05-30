@@ -100,8 +100,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.black);
 		g.fillRect(1, 1, 692, 592);
 		
-		// mappa
-		mappa.draw((Graphics2D) g);
+            try {
+                // mappa
+                mappa.draw((Graphics2D) g);
+            } catch (IOException ex) {
+                Logger.getLogger(Gameplay.class.getName()).log(Level.SEVERE, null, ex);
+            }
 		
 		// bordi
 		g.setColor(Color.pink);
